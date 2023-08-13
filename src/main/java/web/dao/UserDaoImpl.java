@@ -1,65 +1,50 @@
 package web.dao;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import web.model.User;
 
-import javax.persistence.TypedQuery;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
 public class UserDaoImpl implements UserDao {
-    @Autowired
-    private SessionFactory sessionFactory;
 
-    @Override
-    public void add(User user) {
-        sessionFactory.getCurrentSession().save(user);
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    protected EntityManager getEntityManager() {
+        return this.entityManager;
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    public List<User> listUsers() {
-        TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery("from User");
-        return query.getResultList();
+    public void add(User user) {
+        getEntityManager().persist(user);
     }
 
     @Override
     public void dell(long id) {
-        Transaction transaction = null;
-        try (Session session = sessionFactory.openSession()) {
-            transaction = session.beginTransaction();
-            session.delete(session.get(User.class, id));
-            transaction.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            if (transaction != null) {
-                transaction.rollback();
-            }
-        }
+        getEntityManager()
+                .createQuery("delete from User where id=: id")
+                .setParameter("id", id)
+                .executeUpdate();
     }
 
     @Override
     public void update(long id, String firstName, String lastName, String email) {
-        Transaction transaction = null;
-        try (Session session = sessionFactory.openSession()) {
-            transaction = session.beginTransaction();
-            User user = session.get(User.class, id);
-            if (user != null) {
-                user.setFirstName(firstName);
-                user.setLastName(lastName);
-                user.setEmail(email);
-                session.save(user);
-            }
-            transaction.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            if (transaction != null) {
-                transaction.rollback();
-            }
-        }
+        getEntityManager()
+                .createQuery("update User SET firstName =: firstName, lastName =: lastName, email =: email where id=: id")
+                .setParameter("firstName", firstName)
+                .setParameter("lastName", lastName)
+                .setParameter("email", email)
+                .setParameter("id", id)
+                .executeUpdate();
     }
+
+    @Override
+    @SuppressWarnings(value = "unchecked")
+    public List<User> listUsers() {
+        return getEntityManager().createQuery("From User").getResultList();
+    }
+
 }
