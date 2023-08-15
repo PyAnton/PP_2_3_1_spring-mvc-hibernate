@@ -1,0 +1,83 @@
+body {
+	background-color: #382657;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  .header-container {
+	display: flex;
+	justify-content: center;/* Размещение по горизонтали */
+  }
+  .header {
+    background-color: #5f3e9c;
+    text-align: center;
+    padding: 22px;
+	width: 1400px;
+	max-width: 80%;
+	min-width: 400px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+	border-radius: 0 0 15px 15px; /* Первые два значения задают радиус для верхних углов, оставшиеся два - для нижних углов */
+  }
+  .header-links {
+	padding-left: 30px;
+    display: flex;
+    gap: 20px;
+  }
+  .header-link {
+    color: aliceblue;
+    text-decoration: none;
+    border-bottom: none; /* Убираем нижнее подчеркивание */
+    transition: color 0.3s; /* Плавное изменение цвета при наведении */
+  }
+  .header-link:hover {
+    color: rgb(89, 159, 206); /* Изменение цвета при наведении */
+	text-decoration: none;
+  }
+  .flex-container {
+	width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+	text-align: center;
+	display: flex;
+	/* align-items: center; Выравнивание элементов по центру вертикально */
+  }
+  .table-container {
+	color: aliceblue;
+	width: 100%; /* Занимает 100% ширины видимой области */
+	max-width: 300px; /* Максимальная ширина хедера */
+	margin: 0 auto; /* Выравнивание по центру по горизонтали */
+  }
+  .table-container th, .table-container td {
+	border: 3px solid #9e2d2d; /*Граница для ячеек и заголовков */
+	max-height: 5px;
+	text-align: left; /* Выравнивание текста */
+  }
+  .table {
+	color: aliceblue;
+  }
+  .content {
+    margin: 0 auto;
+    padding: 0px;
+	text-align: center;
+	color: aliceblue;
+  }
+  .footer {
+    background-color: #5f3e9c;
+    color: aliceblue;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+  .input {
+	background-color: #5f3e9c;
+	color: aliceblue;
+  }
+  .button {
+	background-color: #9e2d2d;
+	border-radius: 7px;
+	border: 0px;
+  }

@@ -51,4 +51,16 @@ public class UserController {
         userService.update(updateId, updateFirstName, updateLastName, updateEmail);
         return USERS_PAGE;
     }
+    @GetMapping ("/static/content/getHtmlCreate")
+    public String getHtmlCreate() {
+        return "content/create_user";
+    }
+    @GetMapping ("/static/content/getHtmlUpdate")
+    public String getHtmlUpdate() {
+        return "content/update_user";
+    }
+    @GetMapping ("/static/content/getHtmlDelete")
+    public String getHtmlDelete() {
+        return "content/delete_user";
+    }
 }
