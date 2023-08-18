@@ -1,7 +1,7 @@
 document.getElementById("createUser").addEventListener("click", function() {
     const contentElement = document.getElementById("content");
   
-    fetch("users/static/content/getHtmlCreate")
+    fetch("users/static/content/create")
       .then(response => response.text())
       .then(data => {
         contentElement.innerHTML = data;
@@ -10,7 +10,7 @@ document.getElementById("createUser").addEventListener("click", function() {
 document.getElementById("updateUser").addEventListener("click", function() {
     const contentElement = document.getElementById("content");
 
-    fetch("users/static/content/getHtmlUpdate")
+    fetch("users/static/content/update")
         .then(response => response.text())
         .then(data => {
         contentElement.innerHTML = data;
@@ -19,7 +19,7 @@ document.getElementById("updateUser").addEventListener("click", function() {
 document.getElementById("deleteUser").addEventListener("click", function() {
     const contentElement = document.getElementById("content");
 
-    fetch("users/static/content/getHtmlDelete")
+    fetch("users/static/content/delete")
         .then(response => response.text())
         .then(data => {
         contentElement.innerHTML = data;

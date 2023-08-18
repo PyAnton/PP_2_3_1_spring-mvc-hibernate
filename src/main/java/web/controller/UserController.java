@@ -12,9 +12,14 @@ import java.util.List;
 @Controller
 @RequestMapping("/users")
 public class UserController {
-    @Autowired
-    private UserService userService;
+
+    private final UserService userService;
     private static final String USERS_PAGE = "redirect:/users";
+
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping
     public String getUsers(@RequestParam(name = "count", defaultValue = "15") int count, Model model) {
@@ -42,16 +47,9 @@ public class UserController {
         userService.update(updateId, updateFirstName, updateLastName, updateEmail);
         return USERS_PAGE;
     }
-    @GetMapping ("/static/content/getHtmlCreate")
-    public String getHtmlCreate() {
-        return "content/create_user";
+    @GetMapping ("/static/content/{action}")
+    public String getStaticContent(@PathVariable String action) {
+        return "content/"+action+"_user";
     }
-    @GetMapping ("/static/content/getHtmlUpdate")
-    public String getHtmlUpdate() {
-        return "content/update_user";
-    }
-    @GetMapping ("/static/content/getHtmlDelete")
-    public String getHtmlDelete() {
-        return "content/delete_user";
-    }
+
 }
