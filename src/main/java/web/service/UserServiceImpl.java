@@ -36,4 +36,15 @@ public class UserServiceImpl implements UserService {
     public void update(long id, String firstName, String lastName, String email) {
         userDao.update(id, firstName, lastName, email);
     }
+
+    @Transactional
+    @Override
+    public List<User> listUsersCount(int count) {
+        List<User> listUsers = listUsers();
+        if (count >= 15) {
+            return listUsers;
+        } else {
+            return listUsers.subList(0, Math.min(count, listUsers.size()));
+        }
+    }
 }

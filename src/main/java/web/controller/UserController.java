@@ -18,16 +18,7 @@ public class UserController {
 
     @GetMapping
     public String getUsers(@RequestParam(name = "count", defaultValue = "15") int count, Model model) {
-        List<User> listUsers = userService.listUsers();
-        List<User> usersToShow;
-
-        if (count >= 15) {
-            usersToShow = listUsers;
-        } else {
-            usersToShow = listUsers.subList(0, Math.min(count, listUsers.size()));
-        }
-
-        model.addAttribute("users", usersToShow);
+        model.addAttribute("users", userService.listUsersCount(count));
         return "users";
     }
 
@@ -37,8 +28,8 @@ public class UserController {
         return USERS_PAGE;
     }
 
-    @PostMapping("/delete")
-    public String dellUser(@RequestParam long deleteId) {
+    @GetMapping("/delete")
+    public String dellUser(@RequestParam(name = "deleteId") long deleteId) {
         userService.dell(deleteId);
         return USERS_PAGE;
     }

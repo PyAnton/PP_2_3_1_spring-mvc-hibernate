@@ -12,4 +12,5 @@ public interface UserService {
     void update(long id, String firstName, String lastName, String email);
 
     List<User> listUsers();
+    List<User> listUsersCount(int count);
 }
