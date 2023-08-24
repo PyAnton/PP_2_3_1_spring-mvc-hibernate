@@ -42,8 +42,9 @@
             </table>
         </div>
         <div id="content" class="content">
-            <h5>Привет, выбери действие </h5>
-            <h5> в шапке!</h5>
+            <h5 th:if="${message}">Сообщение: <span th:text="${message}"></span></h5>
+            <h5 th:unless="${message}">Привет, выбери действие</h5>
+            <h5 th:unless="${message}"> в шапке!</h5>
         </div>
     </div>
       

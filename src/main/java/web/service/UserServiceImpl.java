@@ -31,14 +31,23 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public void dell(long id) {
-        userDao.dell(id);
+    public boolean dell(long id) {
+
+        if (userDao.findUserById(id)!=null) {
+            userDao.dell(id);
+            return true;
+        }
+        return false;
     }
 
     @Transactional
     @Override
-    public void update(long id, String firstName, String lastName, String email) {
-        userDao.update(id, firstName, lastName, email);
+    public boolean update(long id, String firstName, String lastName, String email) {
+        if (userDao.findUserById(id)!=null) {
+            userDao.update(id, firstName, lastName, email);
+            return true;
+        }
+        return false;
     }
 
     @Transactional
